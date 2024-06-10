@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Image Carousel</title>
+
+        <!-- fontawesome cdn -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+
+        <!-- stylesheet -->
+        <link rel="stylesheet" href="./src/style.css" />
+    </head>
+    <body>
+        <d  iv class="container">
+            <button class="prev__button"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="image__wrapper">
+                <img src="./src/images/slide1.jpg" alt="img" />
+                <img src="./src/images/slide2.jpg" alt="img" />
+                <img src="./src/images/slide3.jpg" alt="img" />
+                <img src="./src/images/slide4.jpg" alt="img" />
+                <img src="./src/images/slide5.jpg" alt="img" />
+                <img src="./src/images/slide6.jpg" alt="img" />
+            </div>
+            <button class="next__button"><i class="fa-solid fa-arrow-right"></i></button>
+            <div class="indicator__dots">
+                <button class="dot active"></button>
+                <button class="dot"></button>
+                <button class="dot"></button>
+                <button class="dot"></button>
+                <button class="dot"></button>
+                <button class="dot"></button>
+            </div>
+        </div>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>
