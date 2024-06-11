@@ -26,26 +26,27 @@ class ImageSlider {
     }
 
     private scrollLeft(): void {
-        this.container.scrollLeft -= this.scrollAmount;
-        this.updateActiveDot(true);
-    }
-
-    private scrollRight(): void {
-        this.container.scrollLeft += this.scrollAmount;
+        if (this.slideNumber === 0) {
+            this.slideNumber = this.dots.length - 1;
+        } else {
+            this.slideNumber--;
+        }
+        this.container.scrollLeft = this.slideNumber * this.scrollAmount;
         this.updateActiveDot();
     }
 
-    private updateActiveDot(right: boolean = false): void {
-        this.dots.forEach((dot) => dot.classList.remove("active"));
-        if (right) {
-            if (this.slideNumber > 0) {
-                this.slideNumber--;
-            }
+    private scrollRight(): void {
+        if (this.slideNumber === this.dots.length - 1) {
+            this.slideNumber = 0;
         } else {
-            if (this.slideNumber < this.dots.length - 1) {
-                this.slideNumber++;
-            }
+            this.slideNumber++;
         }
+        this.container.scrollLeft = this.slideNumber * this.scrollAmount;
+        this.updateActiveDot();
+    }
+
+    private updateActiveDot(): void {
+        this.dots.forEach((dot) => dot.classList.remove("active"));
         this.dots[this.slideNumber].classList.add("active");
     }
 
@@ -71,22 +72,20 @@ class ImageSlider {
     }
 
     private dotClick(index: number): void {
-        this.container.scrollLeft = index * this.scrollAmount;
-        this.dots.forEach((dot) => dot.classList.remove("active"));
-        this.dots[index].classList.add("active");
         this.slideNumber = index;
+        this.container.scrollLeft = index * this.scrollAmount;
+        this.updateActiveDot();
     }
 
     private autoSlide(): void {
-        this.container.scrollLeft += this.scrollAmount;
-        this.dots.forEach((dot) => dot.classList.remove("active"));
-        this.slideNumber++;
-        this.dots[this.slideNumber].classList.add("active");
-
-        if (this.slideNumber >= this.dots.length - 1) {
-            clearInterval(this.autoSlideInterval);
+        if (this.slideNumber === this.dots.length - 1) {
+            this.slideNumber = 0;
+        } else {
+            this.slideNumber++;
         }
+        this.container.scrollLeft = this.slideNumber * this.scrollAmount;
+        this.updateActiveDot();
     }
 }
 
-const slider = new ImageSlider(".image__wrapper", ".prev__button", ".next__button", ".dot", 5000);
+const slider = new ImageSlider(".image__wrapper", ".prev__button", ".next__button", ".dot", 2000);
